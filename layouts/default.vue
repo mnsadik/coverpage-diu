@@ -1,26 +1,5 @@
 <template>
-  <v-app dark>
-    <v-navigation-drawer app v-model="drawer" absolute temporary>
-      <v-list-item>
-        <v-list-item-avatar>
-          <v-img src="https://randomuser.me/api/portraits/men/78.jpg"></v-img>
-        </v-list-item-avatar>
-
-        <v-list-item-content>
-          <v-list-item-title>John Leider</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
-
-      <v-divider></v-divider>
-
-      <v-list>
-        <v-list-item v-for="item in links" :key="item.name" nuxt :to="item.url">
-          <v-list-item-content>
-            <v-list-item-title>{{ item.name }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
+  <v-app>
     <v-app-bar app flat>
       <v-container class="py-0 fill-height">
         <v-app-bar-nav-icon
@@ -30,9 +9,9 @@
         <v-avatar class="mr-10" color="grey darken-1" size="32"></v-avatar>
 
         <v-btn
-          v-for="link in links"
-          :key="link"
-          text
+          v-for="(link, i) in links"
+          :key="i"
+          plain
           nuxt
           :to="link.url"
           class="d-none d-md-flex"
@@ -60,7 +39,9 @@
       </v-container>
     </v-main>
 
-    <v-footer absolute app>
+    <v-footer absolute app class="text-body-2">
+      <span>&reg; M.N. Sadik</span>
+      <v-spacer></v-spacer>
       <span>&copy; {{ new Date().getFullYear() }}</span>
     </v-footer>
   </v-app>
