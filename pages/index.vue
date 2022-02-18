@@ -1,0 +1,423 @@
+<template>
+  <v-stepper v-model="TabNo" vertical>
+    <v-stepper-step :complete="TabNo > 1" step="1">
+      <h6 class="text-h6">Content Type</h6>
+    </v-stepper-step>
+
+    <v-stepper-content step="1">
+      <v-form v-model="ContentValid" class="my-2">
+        <v-radio-group
+          class="mt-0"
+          v-model="Content"
+          row
+          :rules="[(v) => v != null]"
+        >
+          <v-radio label="Assignment" value="assignment"></v-radio>
+          <v-radio label="Lab Report" value="labreport"></v-radio>
+        </v-radio-group>
+      </v-form>
+      <v-btn color="primary" @click="TabNo = 2" :disabled="!ContentValid">
+        Continue
+      </v-btn>
+    </v-stepper-content>
+
+    <v-stepper-step :complete="TabNo > 2" step="2">
+      <h6 class="text-h6">Submission Info</h6>
+    </v-stepper-step>
+
+    <v-stepper-content step="2">
+      <v-form v-model="SubInfoValid" class="mt-2 mb-6">
+        <v-row>
+          <v-col
+            cols="12"
+            :lg="Content == 'assignment' ? '8' : '12'"
+            sm="Content=='assignment'?'6':'12'"
+            xs="12"
+            ><v-text-field
+              dense
+              label="Submitted To"
+              outlined
+              hide-details="auto"
+              clearable
+            ></v-text-field
+          ></v-col>
+          <v-col cols="12" lg="4" sm="6" xs="12" v-if="Content == 'assignment'">
+            <v-select
+              v-model="LevelTerm"
+              :items="LevelTermList"
+              item-text="name"
+              item-value="value"
+              label="Level and Term"
+              hide-details="auto"
+              dense
+              outlined
+              clearable
+            ></v-select>
+          </v-col>
+          <v-col cols="12" lg="8" sm="6" xs="12" v-if="Content == 'assignment'">
+            <v-select
+              :disabled="LevelTerm == null ? true : false"
+              v-model="AssignCourseTitle"
+              :items="AssignCourseTitleList"
+              item-text="name"
+              item-value="value"
+              label="Course Title"
+              hide-details="auto"
+              dense
+              outlined
+              clearable
+            ></v-select>
+          </v-col>
+          <v-col cols="12" lg="8" sm="6" xs="12" v-else>
+            <v-autocomplete
+              v-model="AssignCourseTitle"
+              :items="AssignCourseTitleList"
+              label="Course Title"
+              item-text="name"
+              item-value="value"
+              hide-details="auto"
+              dense
+              outlined
+              clearable
+            >
+            </v-autocomplete>
+          </v-col>
+          <v-col cols="12" lg="4" sm="6" xs="12">
+            <v-text-field
+              label="Course Code"
+              hide-details="auto"
+              dense
+              outlined
+              disabled
+              :value="AssignCourseTitle"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12" lg="4" sm="6" xs="12" v-if="Content == 'labreport'">
+            <v-text-field
+              label="Experiment No."
+              hide-details="auto"
+              dense
+              outlined
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12" lg="8" sm="6" xs="12" v-if="Content == 'labreport'">
+            <v-text-field
+              label="Experiment Name"
+              hide-details="auto"
+              dense
+              outlined
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12" sm="6" xs="12" v-if="Content == 'labreport'">
+            <v-dialog
+              ref="PerD"
+              v-model="PerModal"
+              :return-value.sync="PerformenceDate"
+              width="290px"
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <v-text-field
+                  v-model="PerformenceDate"
+                  label="Date of Performence"
+                  hide-details="auto"
+                  dense
+                  outlined
+                  readonly
+                  clearable
+                  v-bind="attrs"
+                  v-on="on"
+                ></v-text-field>
+              </template>
+              <v-date-picker
+                v-model="PerformenceDate"
+                first-day-of-week="6"
+                show-current
+                scrollable
+              >
+                <v-spacer></v-spacer>
+                <v-btn text color="primary" @click="PerModal = false">
+                  Cancel
+                </v-btn>
+                <v-btn
+                  text
+                  color="primary"
+                  @click="$refs.PerD.save(PerformenceDate)"
+                >
+                  OK
+                </v-btn>
+              </v-date-picker>
+            </v-dialog>
+          </v-col>
+          <v-col cols="12" sm="6" xs="12" v-if="Content == 'labreport'">
+            <v-dialog
+              ref="SubD"
+              v-model="SubModal"
+              :return-value.sync="SubmissionDate"
+              width="290px"
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <v-text-field
+                  v-model="SubmissionDate"
+                  label="Date of Submission"
+                  hide-details="auto"
+                  dense
+                  outlined
+                  readonly
+                  clearable
+                  v-bind="attrs"
+                  v-on="on"
+                ></v-text-field>
+              </template>
+              <v-date-picker
+                v-model="SubmissionDate"
+                first-day-of-week="6"
+                show-current
+                scrollable
+                :min="PerformenceDate"
+              >
+                <v-spacer></v-spacer>
+                <v-btn text color="primary" @click="SubModal = false">
+                  Cancel
+                </v-btn>
+                <v-btn
+                  text
+                  color="primary"
+                  @click="$refs.SubD.save(SubmissionDate)"
+                >
+                  OK
+                </v-btn>
+              </v-date-picker>
+            </v-dialog>
+          </v-col>
+        </v-row>
+      </v-form>
+      <v-btn color="primary" @click="TabNo = 3"> Continue </v-btn>
+      <v-btn text @click="TabNo = 1"> Back </v-btn>
+    </v-stepper-content>
+
+    <v-stepper-step :complete="TabNo > 3" step="3">
+      <h6 class="text-h6">Submitted By</h6>
+    </v-stepper-step>
+
+    <v-stepper-content step="3">
+      <v-form class="mt-2 mb-6">
+        <v-row>
+          <v-col cols="12" lg="8" sm="6" xs="12">
+            <v-text-field
+              label="Name"
+              hide-details="auto"
+              dense
+              outlined
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12" lg="4" sm="6" xs="12">
+            <v-text-field
+              label="ID No."
+              hide-details="auto"
+              dense
+              outlined
+              type="number"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12" sm="4" xs="12">
+            <v-text-field
+              label="Department"
+              hide-details="auto"
+              dense
+              outlined
+              disabled
+              value="CSE"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12" sm="4" xs="12">
+            <v-text-field
+              label="Section"
+              hide-details="auto"
+              dense
+              outlined
+              disabled
+              value="B"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12" sm="4" xs="12">
+            <v-text-field
+              label="Shift"
+              hide-details="auto"
+              dense
+              outlined
+              disabled
+              value="Evening"
+            ></v-text-field>
+          </v-col>
+        </v-row>
+      </v-form>
+      <v-btn
+        color="primary"
+        nuxt
+        :to="Content == 'assignment' ? '/assignment' : '/lab-report'"
+      >
+        Continue
+      </v-btn>
+      <v-btn text @click="TabNo = 2"> Back </v-btn>
+    </v-stepper-content>
+  </v-stepper>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      TabNo: 1,
+      ContentValid: true,
+      Content: null,
+      SubInfoValid: true,
+      LevelTerm: null,
+      LevelTermList: null,
+      AssignCourseTitle: null,
+      AssignCourseTitleList: null,
+      PerModal: false,
+      PerformenceDate: null,
+      SubModal: false,
+      SubmissionDate: null,
+    };
+  },
+  watch: {
+    Content: function () {
+      this.AssignCourseTitle = null;
+      this.AssignCourseTitleList = null;
+      if (this.Content == "labreport") {
+        this.LevelTerm = null;
+        this.AssignCourseTitleList = [
+          { header: "Level-1 Term-1" },
+          { name: "Physics-II Lab", value: "PHY 123L" },
+          { divider: true },
+
+          { header: "Level-1 Term-2" },
+          { name: "Algorithm Lab", value: "CSE 213L" },
+          { divider: true },
+
+          { header: "Level-1 Term-3" },
+          { name: "Object Oriented Programming Lab", value: "CSE 231L" },
+          { divider: true },
+
+          { header: "Level-2 Term-1" },
+          {
+            name: "Microprocessor and assembly Language Lab",
+            value: "CSE 231L",
+          },
+          { name: "Electronic Devices and Circuits Lab", value: "CSE 224L" },
+          { divider: true },
+
+          { header: "Level-2 Term-2" },
+          { name: "Computer Networks Lab", value: "CSE 313L" },
+          { name: "Database Management System Lab", value: "CSE 311L" },
+          { divider: true },
+
+          { header: "Level-2 Term-3" },
+          { name: "Compiler Design Lab", value: "CSE 331L" },
+          { name: "Simulation and Modeling Lab", value: "CSE 413L" },
+          { name: "Operating System Lab", value: "CSE 323L" },
+          { divider: true },
+
+          { header: "Level-3 Term-1" },
+          { name: "System Analysis and Design Lab", value: "CSE 321L" },
+          { name: "Computer Graphics Lab", value: "CSE 421L" },
+          { divider: true },
+
+          { header: "Level-3 Term-2" },
+          { name: "Artificial Intelligence Lab", value: "CSE 412L" },
+        ];
+      } else {
+        this.LevelTermList = [
+          { name: "Level-1 Term-1", value: "l1t1" },
+          { name: "Level-1 Term-2", value: "l1t2" },
+          { name: "Level-1 Term-3", value: "l1t3" },
+          { name: "Level-2 Term-1", value: "l2t1" },
+          { name: "Level-2 Term-2", value: "l2t2" },
+          { name: "Level-2 Term-3", value: "l2t3" },
+          { name: "Level-3 Term-1", value: "l3t1" },
+          { name: "Level-3 Term-2", value: "l3t2" },
+          { name: "Level-3 Term-3", value: "l3t3" },
+        ];
+      }
+    },
+    LevelTerm: function () {
+      this.AssignCourseTitle = null;
+      this.AssignCourseTitleList = null;
+      if (this.LevelTerm == "l1t1") {
+        this.AssignCourseTitleList = [
+          {
+            name: "Mathematics II: Linear Algebraand Coordinate Geometry",
+            value: "MAT 121",
+          },
+          { name: "Discrete Mathematics", value: "CSE 131" },
+          { name: "English Language-I", value: "ENG 113" },
+          {
+            name: "Physics- II: Electricity, Magnetism and Modern Physics",
+            value: "PHY 123",
+          },
+        ];
+      } else if (this.LevelTerm == "l1t2") {
+        this.AssignCourseTitleList = [
+          { name: "Algorithms", value: "CSE 213" },
+          { name: "Accounting", value: "ACC 214" },
+          { name: "Economics", value: "ECO 314" },
+          {
+            name: "Mathematics III : Ordinary and PartialDifferential Equations",
+            value: "MAT 134",
+          },
+        ];
+      } else if (this.LevelTerm == "l1t3") {
+        this.AssignCourseTitleList = [
+          { name: "Theory of Computing", value: "CSE 221" },
+          { name: "Object Oriented Programming", value: "CSE 222" },
+          {
+            name: "Mathematics-IV : Engineering Mathematics",
+            value: "MAT 211",
+          },
+          { name: "Statistics", value: "STA 223" },
+        ];
+      } else if (this.LevelTerm == "l2t1") {
+        this.AssignCourseTitleList = [
+          { name: "Microprocessor and Assembly Language", value: "CSE 231" },
+          { name: "Electronic Devices and Circuits", value: "CSE 224" },
+          { name: "Instrumentation and Control", value: "CSE 232" },
+          { name: "Data Communication", value: "CSE 233" },
+        ];
+      } else if (this.LevelTerm == "l2t2") {
+        this.AssignCourseTitleList = [
+          { name: "Computer Architecture and Organization", value: "CSE 322" },
+          { name: "Computer Networks", value: "CSE 313" },
+          { name: "Database Management System", value: "CSE 311" },
+          { name: "Numerical Methods", value: "CSE 312" },
+        ];
+      } else if (this.LevelTerm == "l2t3") {
+        this.AssignCourseTitleList = [
+          { name: "Compiler Design", value: "CSE 331" },
+          { name: "Simulation and Modeling", value: "CSE 413" },
+          { name: "Operating System", value: "CSE 323" },
+        ];
+      } else if (this.LevelTerm == "l3t1") {
+        this.AssignCourseTitleList = [
+          { name: "System Analysis and Design", value: "CSE 321" },
+          { name: "Computer Graphics", value: "CSE 421" },
+          { name: "E-Commerce & Web Application", value: "CSE 431" },
+          { name: "Industrial Management", value: "MGT 414" },
+        ];
+      } else if (this.LevelTerm == "l3t2") {
+        this.AssignCourseTitleList = [
+          { name: "Artificial Intelligence", value: "CSE 412" },
+          { name: "Communication Engineering", value: "CSE 411" },
+          { name: "Software Engineering", value: "CSE 332" },
+          { name: "Project Phase I", value: "CSE 499" },
+        ];
+      } else if (this.LevelTerm == "l3t3") {
+        this.AssignCourseTitleList = [
+          { name: "Peripherals & Interfacing", value: "CSE 333" },
+          { name: "Computer and Network Security", value: "CSE 432" },
+        ];
+      }
+    },
+  },
+};
+</script>
