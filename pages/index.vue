@@ -208,7 +208,13 @@
           </v-col>
         </v-row>
       </v-form>
-      <v-btn color="success" @click="TabNo = 3"> Continue </v-btn>
+      <v-btn
+        :disabled="Course == null || Course.name == null"
+        color="success"
+        @click="TabNo = 3"
+      >
+        Continue
+      </v-btn>
       <v-btn
         color="error"
         text
@@ -248,7 +254,6 @@
               hide-details="auto"
               dense
               outlined
-              type="number"
               clearable
             ></v-text-field>
           </v-col>
@@ -287,8 +292,14 @@
           </v-col>
         </v-row>
       </v-form>
+      <!-- nuxt
+        :to="Content == 'assignment' ? '/assignment' : '/lab-report'" -->
+      <v-btn color="primary" :disabled="Submit" @click="AddInfos()">
+        Submit
+      </v-btn>
       <v-btn
         color="success"
+        :disabled="Continue"
         nuxt
         :to="Content == 'assignment' ? '/assignment' : '/lab-report'"
       >
@@ -296,6 +307,14 @@
       </v-btn>
       <v-btn plain @click="TabNo = 2"> Back </v-btn>
     </v-stepper-content>
+    <!-- {{ SubTo }} <br />
+    {{ Course }}<br />
+    {{ ExpNo }}<br />
+    {{ ExpName }}<br />
+    {{ PerformenceDate }}<br />
+    {{ SubmissionDate }}<br />
+    {{ SubBy }}<br />
+    {{ IdNo }}<br /> -->
   </v-stepper>
 </template>
 
@@ -320,6 +339,8 @@ export default {
       SubmissionDate: null,
       SubBy: null,
       IdNo: null,
+      Submit: false,
+      Continue: true,
     };
   },
   watch: {
@@ -402,7 +423,7 @@ export default {
           { name: "Accounting", value: "ACC 214" },
           { name: "Economics", value: "ECO 314" },
           {
-            name: "Mathematics III : Ordinary and PartialDifferential Equations",
+            name: "Mathematics III : Ordinary and Partial Differential Equations",
             value: "MAT 134",
           },
         ];
@@ -472,6 +493,20 @@ export default {
       this.ExpName = null;
       this.PerformenceDate = null;
       this.SubmissionDate = null;
+    },
+    AddInfos() {
+      this.$store.dispatch("NewInfos", {
+        SubTo: this.SubTo,
+        Course: this.Course,
+        ExpNo: this.ExpNo,
+        ExpName: this.ExpName,
+        PerformenceDate: this.PerformenceDate,
+        SubmissionDate: this.SubmissionDate,
+        SubBy: this.SubBy,
+        IdNo: this.IdNo,
+      });
+      this.Submit = !this.Submit;
+      this.Continue = !this.Continue;
     },
   },
 };

@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app flat>
+    <v-app-bar app flat class="d-print-none">
       <v-container class="py-0 fill-height">
         <v-app-bar-nav-icon
           @click="drawer = !drawer"
@@ -39,7 +39,7 @@
       </v-container>
     </v-main>
 
-    <v-footer absolute app class="text-body-2">
+    <v-footer absolute app class="text-body-2 d-print-none">
       <span>&reg; M.N. Sadik</span>
       <v-spacer></v-spacer>
       <span>&copy; {{ new Date().getFullYear() }}</span>
