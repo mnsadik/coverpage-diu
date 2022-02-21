@@ -407,7 +407,7 @@ export default {
       if (this.LevelTerm == "l1t1") {
         this.CourseList = [
           {
-            name: "Mathematics II: Linear Algebraand Coordinate Geometry",
+            name: "Mathematics II: Linear Algebra Coordinate Geometry",
             value: "MAT 121",
           },
           { name: "Discrete Mathematics", value: "CSE 131" },
@@ -482,6 +482,13 @@ export default {
       this.CourseCode = this.Course.value;
     },
   },
+  beforeMount() {
+    const User = JSON.parse(localStorage.getItem("Student"));
+    if (User != null || User != "") {
+      this.SubBy = User.name;
+      this.IdNo = User.id;
+    }
+  },
   methods: {
     ClearSubTo() {
       this.SubTo = null;
@@ -505,6 +512,10 @@ export default {
         SubBy: this.SubBy,
         IdNo: this.IdNo,
       });
+      localStorage.setItem(
+        "Student",
+        JSON.stringify({ name: this.SubBy, id: this.IdNo })
+      );
       this.Submit = !this.Submit;
       this.Continue = !this.Continue;
     },

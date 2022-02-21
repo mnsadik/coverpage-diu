@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans&family=Quicksand:wght@400;500;700&display=swap"); */
+* {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-print-color-adjust: exact !important;
+  /* font-family: "Open Sans", sans-serif; */
+  font-family: "Poppins", sans-serif;
+  /* font-family: "Quicksand", sans-serif; */
+  letter-spacing: 0.5px;
+}
+td {
+  font-family: "Open Sans", sans-serif;
+  font-size: 14px;
+  padding: 6px 12px;
+}
+td:nth-child(1) {
+  font-weight: 500;
+  width: 4.6cm;
+}
+@page {
+  size: A4;
+  margin: 0;
+}

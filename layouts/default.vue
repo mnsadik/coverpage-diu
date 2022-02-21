@@ -40,7 +40,16 @@
     </v-main>
 
     <v-footer absolute app class="text-body-2 d-print-none">
-      <span>&reg; M.N. Sadik</span>
+      <span
+        >&reg;
+        <a
+          class="text-decoration-none"
+          href="http://mnsadik.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          >M.N. Sadik</a
+        ></span
+      >
       <v-spacer></v-spacer>
       <span>&copy; {{ new Date().getFullYear() }}</span>
     </v-footer>
