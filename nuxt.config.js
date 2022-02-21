@@ -34,12 +34,12 @@ export default {
         hid: "twitter:description",
         name: "twitter:description",
         content:
-          'This amazing application will help you to genarate a cover page for your assignment/lab report. Just input your informations hit "Continue" and it is ready to GO!!!',
+          'This amazing application will assist you in creating a cover page for your assignment or lab report. Simply enter your information, select "Continue" and you are good to go!!!',
       },
       {
         hid: "twitter:image",
         name: "twitter:image",
-        content: "/DIU Logo.png",
+        content: "/CardImg.jpg",
       },
 
       // Open Graph
@@ -64,12 +64,12 @@ export default {
         hid: "og:description",
         property: "og:description",
         content:
-          'This amazing application will help you to genarate a cover page for your assignment/lab report. Just input your informations hit "Continue" and it is ready to GO!!!',
+          'This amazing application will assist you in creating a cover page for your assignment or lab report. Simply enter your information, select "Continue" and you are good to go!!!',
       },
       {
         hid: "og:image",
         property: "og:image",
-        content: "/DIU Logo.png",
+        content: "/CardImg.jpg",
       },
       {
         hid: "og:image:alt",
