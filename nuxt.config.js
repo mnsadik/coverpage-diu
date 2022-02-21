@@ -6,12 +6,76 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: "%s - DIU Cover Page",
+    titleTemplate: "%s - DIU Cover Page Generator",
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { hid: "description", name: "description", content: "" },
       { name: "format-detection", content: "telephone=no" },
+      // Twitter
+      // Test on: https://cards-dev.twitter.com/validator
+      {
+        hid: "twitter:card",
+        name: "twitter:card",
+        content: "summary_large_image",
+      },
+      { hid: "twitter:site", name: "twitter:site", content: "@mnsadik" },
+      {
+        hid: "twitter:url",
+        name: "twitter:url",
+        content: "https://diucoverpage.netlify.app",
+      },
+      {
+        hid: "twitter:title",
+        name: "twitter:title",
+        content: "Welcome to DIU Cover Page Generator",
+      },
+      {
+        hid: "twitter:description",
+        name: "twitter:description",
+        content:
+          'This amazing application will help you to genarate a cover page for your assignment/lab report. Just input your informations hit "Continue" and it is ready to GO!!!',
+      },
+      {
+        hid: "twitter:image",
+        name: "twitter:image",
+        content: "/DIU Logo.png",
+      },
+
+      // Open Graph
+      // Test on: https://developers.facebook.com/tools/debug/
+      {
+        hid: "og:site_name",
+        property: "og:site_name",
+        content: "DIU Cover Page Generator",
+      },
+      { hid: "og:type", property: "og:type", content: "website" },
+      {
+        hid: "og:url",
+        property: "og:url",
+        content: "https://diucoverpage.netlify.app",
+      },
+      {
+        hid: "og:title",
+        property: "og:title",
+        content: "Welcome to DIU Cover Page Generator",
+      },
+      {
+        hid: "og:description",
+        property: "og:description",
+        content:
+          'This amazing application will help you to genarate a cover page for your assignment/lab report. Just input your informations hit "Continue" and it is ready to GO!!!',
+      },
+      {
+        hid: "og:image",
+        property: "og:image",
+        content: "/DIU Logo.png",
+      },
+      {
+        hid: "og:image:alt",
+        property: "og:image:alt",
+        content: "Daffodil International University's Logo",
+      },
     ],
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
   },
