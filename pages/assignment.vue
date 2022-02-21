@@ -1,46 +1,10 @@
 <template>
   <v-container class="d-flex flex-column align-center fill-width">
-    <div style="" id="printMe">
-      <div
-        style="
-          width: 70%;
-          height: 5cm;
-          background: #ffffa1;
-          position: absolute;
-          transform: translateX(-50%);
-          left: 50%;
-        "
-      ></div>
-      <img
-        src="/DIU Logo.png"
-        alt=""
-        style="
-          max-width: 270px;
-          transform: translateX(-50%);
-          position: absolute;
-          top: 1.7cm;
-          left: 50%;
-        "
-      />
-      <h1
-        style="
-          font-size: 32px;
-          font-weight: 500;
-          text-align: center;
-          padding-top: 5.9cm;
-          padding-bottom: 0.6cm;
-        "
-      >
-        Assignment
-      </h1>
-      <table
-        border="1"
-        style="
-          width: 64.7619047619%;
-          border-collapse: collapse;
-          margin-left: 17.61904761905%;
-        "
-      >
+    <div id="printMe">
+      <div id="BannerBG"></div>
+      <img src="/DIU Logo.png" alt="DIU Logo" id="BannerImg" />
+      <h1>Assignment</h1>
+      <table border="1">
         <tbody>
           <tr>
             <td>Submitted To</td>
@@ -57,26 +21,17 @@
             <!-- <td>:</td> -->
             <td>{{ $store.state.Course.value }}</td>
           </tr>
+          <tr>
+            <td>Date</td>
+            <!-- <td>:</td> -->
+            <td>
+              {{ $store.state.PerformenceDate }}
+            </td>
+          </tr>
         </tbody>
       </table>
-      <h3
-        style="
-          font-size: 20px;
-          font-weight: 500;
-          text-align: center;
-          padding: 0.4cm;
-        "
-      >
-        Submitted By
-      </h3>
-      <table
-        border="1"
-        style="
-          width: 64.7619047619%;
-          border-collapse: collapse;
-          margin-left: 17.61904761905%;
-        "
-      >
+      <h3>Submitted By</h3>
+      <table border="1">
         <tbody>
           <tr>
             <td>Name</td>
@@ -96,7 +51,7 @@
           <tr>
             <td>Section</td>
             <!-- <td>:</td> -->
-            <td>B</td>
+            <td>{{ $store.state.Section }}</td>
           </tr>
           <tr>
             <td>Shift</td>
@@ -105,56 +60,18 @@
           </tr>
         </tbody>
       </table>
-      <p
-        style="
-          font-size: 14px;
-          font-weight: 300;
-          position: absolute;
-          bottom: 10%;
-          right: 20%;
-          padding: 10px 30px;
-          border-top: 1px dotted black;
-        "
-      >
-        Signature
-      </p>
+      <span id="sign">Signature</span>
     </div>
-    <v-btn color="primary" class="mt-6" @click="print()">Print</v-btn>
-    <!-- <v-btn
-      class="d-print-none"
-      onclick="printJS({ printable: 'printMe', type: 'html', targetStyles:['*'] header: 'PrintJS - Form Element Selection' })"
-    >
-      Print
-    </v-btn> -->
   </v-container>
 </template>
 
 <script>
 export default {
-  methods: {
-    async print() {
-      // Pass the element id here
-      await this.$htmlToPaper("printMe");
-    },
+  head: {
+    title: "Assignment",
   },
+  layout: "print",
 };
 </script>
 
-<style scoped>
-#printMe {
-  width: 21cm;
-  height: 29.7cm;
-  background: white;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  display: block;
-  position: relative;
-}
-#printMe table tbody tr td {
-  font-size: 14px;
-  padding: 6px 12px;
-}
-#printMe table tbody tr td:nth-child(1) {
-  font-weight: 500;
-  width: 4.6cm;
-}
-</style>
+<style scoped></style>

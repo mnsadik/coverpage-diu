@@ -7,6 +7,7 @@ export const state = () => ({
   SubmissionDate: null,
   SubBy: null,
   IdNo: null,
+  Section: null,
 });
 
 export const actions = {
@@ -25,5 +26,6 @@ export const mutations = {
     state.SubmissionDate = info.SubmissionDate;
     state.SubBy = info.SubBy;
     state.IdNo = info.IdNo;
+    state.Section = info.Section;
   },
 };

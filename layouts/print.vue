@@ -1,19 +1,40 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap");
-/* @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans&family=Quicksand:wght@400;500;700&display=swap"); */
-* {
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-print-color-adjust: exact !important;
-  /* font-family: "Open Sans", sans-serif; */
-  font-family: "Poppins", sans-serif;
-  /* font-family: "Quicksand", sans-serif; */
-  letter-spacing: 0.5px;
+<template>
+  <v-app>
+    <Navbar />
+    <v-main>
+      <client-only>
+        <v-container class="d-flex flex-column align-center" id="PageContainer">
+          <Nuxt />
+          <v-btn color="primary" class="my-4" @click="print()">Print</v-btn>
+        </v-container>
+      </client-only>
+    </v-main>
+
+    <Footer />
+  </v-app>
+</template>
+
+<script>
+export default {
+  methods: {
+    async print() {
+      // Pass the element id here
+      await this.$htmlToPaper("printMe");
+    },
+  },
+};
+</script>
+
+<style>
+#PageContainer {
+  overflow: auto;
+  width: 100vw;
 }
 #printMe {
   width: 21cm;
   height: 29.7cm;
   background: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   display: block;
   position: relative;
 }
@@ -32,34 +53,33 @@
   top: 1.7cm;
   left: 50%;
 }
-h1 {
+#printMe h1 {
   font-size: 32px;
   font-weight: 500;
   text-align: center;
   padding-top: 5.9cm;
   padding-bottom: 0.6cm;
 }
-h3 {
+#printMe h3 {
   font-size: 20px;
   font-weight: 500;
   text-align: center;
   padding: 0.6cm 0 0.4cm 0;
 }
-table {
+#printMe table {
   width: 64.7619047619%;
   border-collapse: collapse;
   margin-left: 17.61904761905%;
 }
-td {
-  font-family: "Open Sans", sans-serif;
+#printMe table tbody tr td {
   font-size: 14px;
   padding: 6px 12px;
 }
-td:nth-child(1) {
+#printMe table tbody tr td:nth-child(1) {
   font-weight: 500;
   width: 4.6cm;
 }
-#sign {
+#printMe #sign {
   font-size: 12px;
   font-weight: 300;
   position: absolute;
@@ -68,7 +88,4 @@ td:nth-child(1) {
   padding: 10px 30px;
   border-top: 1px dotted black;
 }
-@page {
-  size: A4;
-  margin: 0;
-}
+</style>
