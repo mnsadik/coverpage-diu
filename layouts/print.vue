@@ -38,26 +38,37 @@ export default {
   display: block;
   position: relative;
 }
-#BannerBG {
+/* #BannerBG {
   width: 70%;
   height: 5cm;
   background: #ffffa1;
   position: absolute;
   transform: translateX(-50%);
   left: 50%;
+} */
+#BannerBG {
+  width: 18cm;
+  height: 25cm;
+  border: 1px dotted black;
+  position: absolute;
+  transform: translateX(-50%);
+  left: 50%;
+  bottom: 1.5cm;
 }
 #BannerImg {
-  max-width: 270px;
+  max-height: 90px;
+  padding: 0 30px;
+  background-color: white;
   transform: translateX(-50%);
   position: absolute;
-  top: 1.7cm;
+  top: 2cm;
   left: 50%;
 }
 #printMe h1 {
   font-size: 32px;
   font-weight: 500;
   text-align: center;
-  padding-top: 5.9cm;
+  margin-top: 5.7cm;
   padding-bottom: 0.6cm;
 }
 #printMe h3 {
@@ -83,7 +94,7 @@ export default {
   font-size: 12px;
   font-weight: 300;
   position: absolute;
-  bottom: 10%;
+  bottom: 2.8cm;
   right: 20%;
   padding: 10px 30px;
   border-top: 1px dotted black;

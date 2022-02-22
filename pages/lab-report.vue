@@ -9,39 +9,39 @@
           <tr>
             <td>Submitted To</td>
             <!-- <td>:</td> -->
-            <td>{{ $store.state.SubTo }}</td>
+            <td>{{ $store.state.Data.SubTo }}</td>
           </tr>
           <tr>
             <td>Course Title</td>
             <!-- <td>:</td> -->
-            <td>{{ $store.state.Course.name }}</td>
+            <td>{{ $store.state.Data.Course.name }}</td>
           </tr>
           <tr>
             <td>Course Code</td>
             <!-- <td>:</td> -->
-            <td>{{ $store.state.Course.value }}</td>
+            <td>{{ $store.state.Data.Course.value }}</td>
           </tr>
           <tr>
             <td>Experiment No.</td>
             <!-- <td>:</td> -->
-            <td>{{ $store.state.ExpNo }}</td>
+            <td>{{ $store.state.Data.ExpNo }}</td>
           </tr>
           <tr>
             <td>Experiment Name</td>
             <!-- <td>:</td> -->
-            <td>{{ $store.state.ExpName }}</td>
+            <td>{{ $store.state.Data.ExpName }}</td>
           </tr>
           <tr>
             <td>Date of Performence</td>
             <!-- <td>:</td> -->
             <td>
-              {{ $store.state.PerformenceDate }}
+              {{ $store.state.Data.PerformenceDate }}
             </td>
           </tr>
           <tr>
             <td>Date of Submission</td>
             <!-- <td>:</td> -->
-            <td>{{ $store.state.SubmissionDate }}</td>
+            <td>{{ $store.state.Data.SubmissionDate }}</td>
           </tr>
         </tbody>
       </table>
@@ -51,27 +51,27 @@
           <tr>
             <td>Name</td>
             <!-- <td>:</td> -->
-            <td>{{ $store.state.SubBy }}</td>
+            <td>{{ $store.state.Data.SubBy }}</td>
           </tr>
           <tr>
             <td>ID No.</td>
             <!-- <td>:</td> -->
-            <td>{{ $store.state.IdNo }}</td>
+            <td>{{ $store.state.Data.IdNo }}</td>
           </tr>
           <tr>
             <td>Department</td>
             <!-- <td>:</td> -->
-            <td>CSE</td>
+            <td>{{ $store.state.Data.Dept }}</td>
           </tr>
           <tr>
             <td>Section</td>
             <!-- <td>:</td> -->
-            <td>{{ $store.state.Section }}</td>
+            <td>{{ $store.state.Data.Section }}</td>
           </tr>
           <tr>
             <td>Shift</td>
             <!-- <td>:</td> -->
-            <td>Evening</td>
+            <td>{{ $store.state.Data.Shift }}</td>
           </tr>
         </tbody>
       </table>

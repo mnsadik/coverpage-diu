@@ -551,7 +551,9 @@ export default {
         SubmissionDate: this.SubmissionDate,
         SubBy: this.SubBy,
         IdNo: this.IdNo,
+        Dept: "CSE",
         Section: this.Section,
+        Shift: "Evening",
       });
       localStorage.setItem(
         "Student",
