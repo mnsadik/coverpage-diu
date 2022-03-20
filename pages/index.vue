@@ -25,7 +25,12 @@
             <v-radio label="Lab Report" value="labreport"></v-radio>
           </v-radio-group>
         </v-form>
-        <v-btn color="success" @click="TabNo = 2" :disabled="!ContentValid">
+        <v-btn
+          color="success"
+          outlined
+          @click="TabNo = 2"
+          :disabled="!ContentValid"
+        >
           Continue
         </v-btn>
       </v-stepper-content>
@@ -245,19 +250,20 @@
         <v-btn
           :disabled="Course == null || Course.name == null"
           color="success"
+          outlined
           @click="TabNo = 3"
         >
           Continue
         </v-btn>
         <v-btn
           color="error"
-          text
+          outlined
           :disabled="Course == null || Course.name == null"
           @click="ClearSubTo()"
         >
           Clear
         </v-btn>
-        <v-btn plain @click="TabNo = 1"> Back </v-btn>
+        <v-btn color="#757575" outlined @click="TabNo = 1"> Back </v-btn>
       </v-stepper-content>
 
       <!-- ##### Step 3 ##### -->
@@ -326,18 +332,19 @@
             </v-col>
           </v-row>
         </v-form>
-        <v-btn color="primary" :disabled="Submit" @click="AddInfos()">
+        <v-btn color="primary" outlined :disabled="Submit" @click="AddInfos()">
           Submit
         </v-btn>
         <v-btn
           color="success"
           :disabled="Continue"
+          outlined
           nuxt
           :to="Content == 'assignment' ? '/assignment' : '/lab-report'"
         >
           Continue
         </v-btn>
-        <v-btn plain @click="TabNo = 2"> Back </v-btn>
+        <v-btn color="#757575" outlined @click="TabNo = 2"> Back </v-btn>
       </v-stepper-content>
 
       <!-- {{ SubTo }} <br />

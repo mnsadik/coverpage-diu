@@ -34,7 +34,7 @@ export default {
         hid: "twitter:description",
         name: "twitter:description",
         content:
-          'This amazing application will assist you in creating a cover page for your assignment or lab report. Simply enter your information, select "Continue" and you are good to go!!!',
+          'This amazing application will assist you in creating a cover page for your assignment or lab report. Simply enter your information, click "Continue" and you are good to go!!!',
       },
       {
         hid: "twitter:image",
@@ -64,7 +64,7 @@ export default {
         hid: "og:description",
         property: "og:description",
         content:
-          'This amazing application will assist you in creating a cover page for your assignment or lab report. Simply enter your information, select "Continue" and you are good to go!!!',
+          'This amazing application will assist you in creating a cover page for your assignment or lab report. Simply enter your information, click "Continue" and you are good to go!!!',
       },
       {
         hid: "og:image",
